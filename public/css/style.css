@@ -1,0 +1,103 @@
+body{
+    margin: 0 35vh;
+    padding: 0;
+    background-color: rgb(225, 222, 222);
+    font-family: sans-serif;
+}
+
+.main-header{
+    width:100%;
+    height:3.5rem;
+    background-color: rgba(171, 46, 217, 0.786);
+}
+.main-header__nav{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+.main-header__item_list{
+    list-style: none;
+    margin: 0 1rem;
+    padding: 0 ;
+    display: flex;
+}
+.main-header__item_list a{
+    margin: 0 1rem;
+    text-decoration: none;
+    color: white;
+}
+.main-header__item_list a:hover{
+    color: black;
+}
+.tab{
+    margin-left: 60vh;
+}
+.t{
+    margin-left: 2vh;
+}
+
+.main-div-form{
+    border: 1px solid black;
+    height: 90vh;
+    border-radius: 2px;
+}
+
+
+/* form */
+
+.form-control label,
+.form-control input{
+    display: flex;
+    width: 100%;
+}
+.form-control input {
+    height: 3.5vh;
+    border: 1px solid rgba(171, 46, 217, 0.786);
+    font: inherit;
+    margin: 1rem 0;
+    border-radius: 1vh;
+}
+
+#submit{
+    font:inherit;
+    height:2.1rem;
+    width: 28.4rem;
+    border: 1px  solid rgba(171, 46, 217, 0.786);
+    color: rgba(171, 46, 217, 0.786);
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    cursor: pointer;
+    border-radius: 2vh;
+    /* margin-left: 20vh; */
+}
+button{
+    font:inherit;
+    height:1.6rem;
+    width: 4rem;
+    border: 1px  solid rgba(171, 46, 217, 0.786);
+    color: rgba(171, 46, 217, 0.786);
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    cursor: pointer;
+    border-radius: 2vh;
+    margin-left: 1rem;
+}
+button:active,
+button:hover{
+    background-color: rgba(171, 46, 217, 0.786);
+    color: white;
+}
+.product-form{
+    width: 30rem;
+    max-width: 90%;
+    margin: auto;
+
+}
+.form-control{
+    border: 2px solid black;
+    width: 100%;
+    margin: 3vh 0 0 0 ;
+    padding: 2vh;
+    border-radius: 2vh;
+}
