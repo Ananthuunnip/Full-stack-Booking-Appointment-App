@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item_list">
+                <li><a href="#">BOOKING . COM</a></li>
+                <li class="tab"><a href="#">PLACE</a></li>
+                <li class="t"><a href="#">SAVED</a></li>
+                <li class="t"><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="main-div-form">
+            <form class="product-form" action="/post/addUser" method="POST">
+                <div class="form-control">
+                    <label for="userName" >UserName</label>
+                    <input type="text"  id="userName" name="userName" />
+                    <label for="conatct" >Contact Details</label>
+                    <input type="text"  id="contact" name="contact" />
+                    <label for="email" >Email address</label>
+                    <input type="email"  id="email" name="email" aria-describedby="emailHelp" />
+                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                </div>
+            </form>
+            <ul id="peopleList" class="list-group"></ul>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        const form = document.getElementById("product-form");
+        const peopleList = document.getElementById("peopleList");
+        async function getAllUsers() {
+            try {
+                const peopleList = document.getElementById("peopleList");
+                const res = await axios.get("http://localhost:4001/get/users");
+                // console.log(res);
+                res.data.forEach((user) => {
+                const li = document.createElement("li");
+                li.className ="list-group-item list-group-item-action list-group-item-dark w-75 m-2";
+                li.appendChild(document.createTextNode(`${user.userName} ${user.contact} ${user.email}`)
+                );
+                const editButton = document.createElement("button");
+                const deleteButton = document.createElement("button");
+                editButton.innerHTML = "edit";
+                deleteButton.innerHTML = "delete";
+                editButton.className ="btn btn-outline-secondary float-end mx-2 btn-sm edit";
+                deleteButton.className = "btn btn-outline-danger btn-sm float-end delete";
+                li.appendChild(editButton);
+                li.appendChild(deleteButton);
+                peopleList.appendChild(li);
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        async function deleteUser(e) {
+            try {
+                if (e.target.classList.contains("delete")) {
+                let id;
+                let userdata = e.target.parentNode.firstChild.wholeText.split(" ");
+                const contact = userdata[userdata.length - 2];
+                const email = userdata[userdata.length - 1];
+                const userInfo = { contact, email };
+                const res = await axios.get(`http://localhost:4001/get/users`);
+                res.data.forEach((user) => {
+                    console.log(userdata);
+                    if (user.contact == contact && user.email == email) {
+                    console.log("enters");
+                    console.log(user.id);
+                    id = user.id;
+                    }
+                });
+                const deleteUser = await axios.get(
+                    `http://localhost:4001/get/deleteUser/${id}`
+                );
+                window.location.reload();
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", getAllUsers);
+        peopleList.addEventListener("click", (e) => {
+            deleteUser(e);
+        });
+    </script>
+</body>
+</html>
